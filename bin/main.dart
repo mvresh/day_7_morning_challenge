@@ -77,25 +77,37 @@ main() {
   String input;
   List<List<String>> board =
   List.generate(boardSize, (_) => List.filled(boardSize, ' '));
+  bool isEmpty(String entry){
+    if(board[getRowAndColumn(entry)[0]-1][getRowAndColumn(entry)[1]-1] == ' '){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
   while(i >= 0){
       if(i % 2 == 0){
         print('X move');
         input = stdin.readLineSync();
-        if (board[getRowAndColumn(input)[0]-1][getRowAndColumn(input)[1]-1] == ' '){
+        if (isEmpty(input)){
           board[getRowAndColumn(input)[0]-1][getRowAndColumn(input)[1]-1] = 'X';
         }
         else{
           print('invalid move');
+          i--;
         }
       }
       else{
         print('O move');
         input = stdin.readLineSync();
-        if(board[getRowAndColumn(input)[0]-1][getRowAndColumn(input)[1]-1] == ' '){
+        if(isEmpty(input)){
           board[getRowAndColumn(input)[0]-1][getRowAndColumn(input)[1]-1] = 'O';
         }
         else{
           print('invalid move');
+          i--;
         }
       }
       printBoard(board);
